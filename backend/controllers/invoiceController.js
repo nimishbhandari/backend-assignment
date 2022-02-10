@@ -199,4 +199,24 @@ const getAllInvoices = async (req, res) => {
   }
 };
 
-export { createInvoice, updateInvoiceById, sendEmailById, getAllInvoices };
+// @route    GET api/invoice/late
+// @desc     Get all late invoices
+// @access   Public
+const getLateInvoices = async (req, res) => {
+  try {
+    const invoices = await Invoice.find({ status: "late" });
+
+    res.json(invoices);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server error");
+  }
+};
+
+export {
+  createInvoice,
+  updateInvoiceById,
+  sendEmailById,
+  getAllInvoices,
+  getLateInvoices,
+};
