@@ -185,4 +185,18 @@ const sendEmailById = async (req, res) => {
   }
 };
 
-export { createInvoice, updateInvoiceById, sendEmailById };
+// @route    GET api/invoice/
+// @desc     Get All invoices
+// @access   Public
+const getAllInvoices = async (req, res) => {
+  try {
+    const invoices = await Invoice.find();
+
+    res.json(invoices);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server error");
+  }
+};
+
+export { createInvoice, updateInvoiceById, sendEmailById, getAllInvoices };
