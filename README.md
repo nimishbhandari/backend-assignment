@@ -2,7 +2,6 @@
 
 > This is the solution of the given task
 
----
 
 ## Setup
 
@@ -12,7 +11,6 @@
 
 ##
 
----
 
 ## Install Dependencies
 
