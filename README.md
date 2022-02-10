@@ -4,17 +4,13 @@
 
 ---
 
-<br>
-
 ## Setup
 
 ### Add a .env file in root folder with the following
 
-<br>
-
 > copy example.env.txt as .env
 
-## <br>
+##
 
 ---
 
@@ -30,7 +26,9 @@ npm install
 npm start
 ```
 
-## Create a new Invoice
+<br>
+
+## > Create a new Invoice
 
 ### Endpoint
 
@@ -51,7 +49,9 @@ npm start
 }
 ```
 
-## Update Invoice by ID
+<br>
+
+## > Update Invoice by ID
 
 ### Endpoint
 
@@ -68,7 +68,9 @@ Example:
 }
 ```
 
-## Send Invoice In Email to customer by ID
+<br>
+
+## > Send Invoice In Email to customer by ID
 
 ### Endpoint
 
@@ -76,13 +78,17 @@ Example:
 
 <img src="./uploads/s1.png">
 
-## Get All Invoices
+<br>
+
+## > Get All Invoices
 
 ### Endpoint
 
 > (GET) http://localhost:5000/api/invoice
 
-## Get All Late Invoices
+<br>
+
+## > Get All Late Invoices
 
 ### Endpoint
 
