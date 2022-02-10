@@ -3,7 +3,6 @@ import Invoice from "../models/invoiceModel.js";
 // @route    POST api/invoice
 // @desc     Create a new invoice
 // @access   Public
-
 const createInvoice = async (req, res) => {
   const {
     hoursOfWork,
@@ -71,8 +70,46 @@ const createInvoice = async (req, res) => {
   }
 };
 
-const test = () => {
-  console.log("test");
+// @route    PUT api/invoice/:id
+// @desc     Update an invoice by id
+// @access   Public
+const updateInvoiceById = async (req, res) => {
+  try {
+    const {
+      hoursOfWork,
+      rateOfWork,
+      workRelatedExpenses,
+      materials,
+      labor,
+      notes,
+      paymentMethod,
+      customerEmail,
+      status,
+      dueDate,
+    } = req.body;
+    const invoice = await Invoice.findById(req.params.id);
+
+    if (invoice) {
+      invoice.hoursOfWork = hoursOfWork || invoice.hoursOfWork;
+      invoice.rateOfWork = rateOfWork || invoice.rateOfWork;
+      invoice.workRelatedExpenses =
+        workRelatedExpenses || invoice.workRelatedExpenses;
+      invoice.materials = materials || invoice.materials;
+      invoice.labor = labor || invoice.labor;
+      invoice.notes = notes || invoice.notes;
+      invoice.paymentMethod = paymentMethod || invoice.paymentMethod;
+      invoice.customerEmail = customerEmail || invoice.customerEmail;
+      invoice.status = status || invoice.status;
+      invoice.dueDate = dueDate || invoice.dueDate;
+
+      res.status(201).json(invoice);
+    } else {
+      return res.status(404).send("No Invoice found");
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server error");
+  }
 };
 
-export { createInvoice, test };
+export { createInvoice, updateInvoiceById };
