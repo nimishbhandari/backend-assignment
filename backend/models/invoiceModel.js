@@ -11,7 +11,7 @@ const InvoiceSchema = mongoose.Schema(
     paymentMethod: { type: String },
     customerEmail: { type: String },
     status: { type: String },
-    dueDate: { type: String },
+    dueDate: { type: Date },
   },
   {
     timestamps: true,

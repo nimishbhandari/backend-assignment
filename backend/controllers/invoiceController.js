@@ -47,8 +47,8 @@ const createInvoice = async (req, res) => {
 
   if (!status) return res.status(404).send("Please enter status ");
 
-  if (!dueDate)
-    return res.status(404).send("Please enter due date (as dueDate)");
+  // if (!dueDate)
+  //   return res.status(404).send("Please enter due date (as dueDate)");
 
   try {
     const invoice = await Invoice.create({
