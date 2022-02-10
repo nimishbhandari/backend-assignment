@@ -1,4 +1,5 @@
 import Invoice from "../models/invoiceModel.js";
+import nodemailer from "nodemailer";
 
 // @route    POST api/invoice
 // @desc     Create a new invoice
@@ -112,4 +113,76 @@ const updateInvoiceById = async (req, res) => {
   }
 };
 
-export { createInvoice, updateInvoiceById };
+// @route    POST api/invoice/:id
+// @desc     Sent email to customer
+// @access   Public
+const sendEmailById = async (req, res) => {
+  try {
+    const invoice = await Invoice.findById(req.params.id);
+
+    if (invoice) {
+      const hoursOfWork = invoice.hoursOfWork;
+      const rateOfWork = invoice.rateOfWork;
+      const workRelatedExpenses = invoice.workRelatedExpenses;
+      const materials = invoice.materials;
+      const labor = invoice.labor;
+      const notes = invoice.notes;
+      const paymentMethod = invoice.paymentMethod;
+      const customerEmail = invoice.customerEmail;
+      const status = invoice.status;
+      const dueDate = invoice.dueDate;
+
+      let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false,
+        auth: {
+          user: "",
+          pass: "",
+        },
+        tls: {
+          rejectUnauthorized: false,
+        },
+      });
+
+      let info = await transporter.sendMail({
+        from: '"" <>',
+        to: customerEmail,
+        subject: "TESTING",
+        text: `General Bill: <br>
+        Hours of work: ${hoursOfWork} <br>
+        Rate of work:${rateOfWork} <br>
+        Work Related Expenses: ${workRelatedExpenses} <br>
+        Work Related Expenses: ${materials} <br>
+        Work Related Expenses: ${labor} <br>
+        Work Related Expenses: ${notes} <br>
+        Work Related Expenses: ${paymentMethod} <br>
+        Work Related Expenses: ${status} <br>
+        Work Related Expenses: ${dueDate} <br>`,
+        html: `General Bill: <br>
+        Hours of work: ${hoursOfWork} <br>
+        Rate of work:${rateOfWork} <br>
+        Work Related Expenses: ${workRelatedExpenses} <br>
+        Work Related Expenses: ${materials} <br>
+        Work Related Expenses: ${labor} <br>
+        Work Related Expenses: ${notes} <br>
+        Work Related Expenses: ${paymentMethod} <br>
+        Work Related Expenses: ${status} <br>
+        Work Related Expenses: ${dueDate} <br>`,
+      });
+
+      console.log("Message sent: %s", info.messageId);
+
+      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+
+      res.send("Sent");
+    } else {
+      return res.status(404).send("No Invoice found");
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server error");
+  }
+};
+
+export { createInvoice, updateInvoiceById, sendEmailById };
