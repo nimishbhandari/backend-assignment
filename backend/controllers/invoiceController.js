@@ -137,8 +137,8 @@ const sendEmailById = async (req, res) => {
         port: 587,
         secure: false,
         auth: {
-          user: "",
-          pass: "",
+          user: "nimishbhandari727521@gmail.com",
+          pass: "zxpesacarunthdkb",
         },
         tls: {
           rejectUnauthorized: false,
@@ -146,29 +146,37 @@ const sendEmailById = async (req, res) => {
       });
 
       let info = await transporter.sendMail({
-        from: '"" <>',
+        from: '"Developer" <nimishbhandari727521@gmail.com>',
         to: customerEmail,
-        subject: "TESTING",
+        subject: "Automated Bill",
         text: `General Bill: <br>
         Hours of work: ${hoursOfWork} <br>
         Rate of work:${rateOfWork} <br>
         Work Related Expenses: ${workRelatedExpenses} <br>
-        Work Related Expenses: ${materials} <br>
-        Work Related Expenses: ${labor} <br>
-        Work Related Expenses: ${notes} <br>
-        Work Related Expenses: ${paymentMethod} <br>
-        Work Related Expenses: ${status} <br>
-        Work Related Expenses: ${dueDate} <br>`,
+        Material: ${materials} <br>
+        Labour: ${labor} <br>
+        Note: ${notes} <br>
+        Payment Method: ${paymentMethod} <br>
+        Status: ${status} <br>
+        Due Date: ${dueDate} <br>
+        <br>
+        Thanking You <br>
+        Developer <br>
+        Nimish Bhandari<br>`,
         html: `General Bill: <br>
         Hours of work: ${hoursOfWork} <br>
         Rate of work:${rateOfWork} <br>
         Work Related Expenses: ${workRelatedExpenses} <br>
-        Work Related Expenses: ${materials} <br>
-        Work Related Expenses: ${labor} <br>
-        Work Related Expenses: ${notes} <br>
-        Work Related Expenses: ${paymentMethod} <br>
-        Work Related Expenses: ${status} <br>
-        Work Related Expenses: ${dueDate} <br>`,
+        Material: ${materials} <br>
+        Labour: ${labor} <br>
+        Note: ${notes} <br>
+        Payment Method: ${paymentMethod} <br>
+        Status: ${status} <br>
+        Due Date: ${dueDate} <br>
+        <br>
+        Thanking You<br>
+        Developer <br>
+        Nimish Bhandari<br>`,
       });
 
       console.log("Message sent: %s", info.messageId);
